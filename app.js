@@ -45,6 +45,8 @@ app.use(express.static(path.join(__dirname,'public')));
 
 //Routes 
 app.use('/',require('./routes/index'))
+//Google strategy auth routes 
+app.use('/auth',require('./routes/auth'))
 
 //logging request to the console 
 if(process.env.NODE_ENV === 'development'){
