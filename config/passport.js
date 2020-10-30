@@ -23,7 +23,7 @@ async (acessToken,refreshToken,profile,done) => {
      }
 
      try{
-         const user = await User.findOne({googleId : profile.id});
+         let user = await User.findOne({googleId : profile.id});
          if(user){
              done(null,user);
          }else{

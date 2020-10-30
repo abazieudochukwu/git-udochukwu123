@@ -7,3 +7,12 @@ p{
     margin-top:50px;
     text-align:center;
 }
+.fixed-position{
+    position: fixed;
+    bottom: 20px;
+    right:  10px;
+}
+
+.samll{
+    width: 1.5625em !important;
+}
