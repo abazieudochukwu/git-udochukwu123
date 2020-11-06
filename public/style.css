@@ -13,6 +13,7 @@ p{
     right:  10px;
 }
 
-.samll{
-    width: 1.5625em !important;
+.fa-small{
+    font-size:16px !important;
 }
+

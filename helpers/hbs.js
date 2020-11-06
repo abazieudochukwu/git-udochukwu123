@@ -18,9 +18,41 @@ truncate: function(str,len){
     }
     return str  
 },
+//RegExp to remove tags from Html 
 stripTags : function(input){
-   return  //input.replace(/<(?:.*)?>/ig,'')
-   
+   return  input.replace(/(<([^>]+)>)/gi, ""); 
+},
+stripNonebreakSpaces: function(input){
+return input.replace(/&nbsp+/,'');
+},
+//function to attach the edit icon to the reading section 
+editIcon : function(storyUser,loggedUser,storyId,floating = true){
+    if(storyUser._id.toString() == loggedUser._id.toString()){
+        if(floating){
+            return `
+                 <a href="/stories/edit/${storyId}" class="btn-floating halfway-fab blue"
+                 ><i class="fas fa-edit fa-small"></i></a>
+            `}
+            else{
+                return `
+                <a  href="stories/edit/${storyId}"><i class ="fas fa-edit"></i>
+                </a>`
+            } 
+        } else {
+                return ""
+            }
+        },
+       /* select : function (selected,options){
+            options.fn(this)
+            .replace(
+                new RegExp('value="' + selected + '"'),
+                '$& selected="selected"'
+            )
+            .replace(
+                new RegExp('>' + selected +'</option>'),
+                'selected="selected"$&'
+            )
+        }*/
+    
 }
 
-}

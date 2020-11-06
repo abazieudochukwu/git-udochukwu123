@@ -12,9 +12,9 @@ router.get('/',ensureGuest,(req,res) => {
         layout:'login'
     });
 })
+
 //@desc  dashboard/
 //@route GET  /dashboard
-
 router.get('/dashboard',ensureAuth,async (req,res) =>{
 try{
 const stories = await Story.find({user: req.user._id}).lean()  
@@ -26,9 +26,7 @@ const stories = await Story.find({user: req.user._id}).lean()
     console.error(err)
     res.render('error/500');
 } 
-
 })
-
 
 
 module.exports = router;

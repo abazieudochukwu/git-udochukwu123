@@ -28,14 +28,17 @@ app.use(express.json());
 
 // function for formatting date 
 
-const {formatDate,truncate,stripTags}  = require('./helpers/hbs');
+const {formatDate,truncate,stripTags,stripNonebreakSpaces,editIcon}  = require('./helpers/hbs');
 
 //config template engine Handlebars
 app.engine('hbs',exphbs({
     helpers: {
         formatDate,
         truncate,
+        stripNonebreakSpaces,
         stripTags,
+        editIcon,
+        
     },
     defaultLayout:'main',
     extname:'.hbs'
@@ -58,6 +61,12 @@ app.use(session({
 //passport middle ware
 app.use(passport.initialize());
 app.use(passport.session());
+
+// set a global variable 
+app.use(function (req,res,next){
+    res.locals.user = req.user || null;
+    next();
+})
 
 //Load all static files 
 app.use(express.static(path.join(__dirname,'public')));

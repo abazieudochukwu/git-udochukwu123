@@ -17,11 +17,9 @@ router.get('/add',ensureAuth,(req,res) => {
 router.post('/story',ensureAuth, async (req,res) => {
    
    try{
-
        req.body.user = req.user.id;
          await  Story.create(req.body);
        res.redirect('/dashboard');
-
    }
    catch(err){
        console.error(err)
@@ -31,7 +29,6 @@ router.post('/story',ensureAuth, async (req,res) => {
 
 //@desc  show all stories   
 //@route GET / stories
-
 router.get('/public',ensureAuth, async (req,res) => {
    
    try{
@@ -49,6 +46,28 @@ res.render('stories/index',{
     res.render('/error/500');
    } 
 });
+
+//@desc  Router to edit stories
+//@desc  GET /stories/edit/:id
+router.get('/edit/:id',ensureAuth, async (req,res) => {
+     
+    const story = await Story.findOne({
+    _id: req.params.id
+     })
+     .lean()
+
+            if(!story){
+                return res.render('error/404');
+            }
+            if(story.user != req.user.id){
+            res.redirect('/stories/public')
+            }
+            else{
+                res.render('stories/edit',{
+                    story,
+                })
+            }
+    }),
 
 
 
